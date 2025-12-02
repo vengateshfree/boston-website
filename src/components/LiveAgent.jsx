@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-
+import { FaFileAlt } from "react-icons/fa";
+import { CgIfDesign } from "react-icons/cg";
+import { FaStar } from "react-icons/fa6";
+import { FaBrain } from "react-icons/fa6";
 function LiveAgent() {
 
       const [apiKey, setApiKey] = useState('');
@@ -123,7 +126,7 @@ function LiveAgent() {
     
       const parseMarkdown = (text) => {
         return text
-          .replace(/### (.*?)$/gm, '<h3 class="font-bold mt-4 text-slate-200">$1</h3>')
+          .replace(/### (.*?)$/gm, '<h3 class="font-semibold mt-4 text-slate-200">$1</h3>')
           .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
           .replace(/- (.*?)$/gm, '<li class="text-slate-300">$1</li>')
           .replace(/(<li.*<\/li>)/s, '<ul class="list-disc pl-6 text-slate-300">$1</ul>');
@@ -147,7 +150,7 @@ function LiveAgent() {
   <div className="relative max-w-7xl mx-auto px-6">
     {/* Header */}
     <div className="text-center mb-16">
-      <h2 className="text-blue-400 font-bold tracking-wider uppercase text-sm">
+      <h2 className="text-blue-400 font-semibold tracking-wider uppercase text-sm">
         Live Agentic AI
       </h2>
       <h3 className="text-4xl font-extrabold mt-2 bg-gradient-to-r from-blue-200 to-white bg-clip-text text-transparent">
@@ -172,11 +175,14 @@ function LiveAgent() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-blue-700/40 border border-blue-500/40 backdrop-blur-md flex items-center justify-center shadow-lg">
-              <i className="fas fa-calculator text-white"></i>
-            </div>
-            <h4 className="text-2xl font-bold">Workload Architect ✨</h4>
-          </div>
+            <div
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-blue-500/10`}
+                >
+                <FaStar  size={30} />
+                 
+                </div>
+            <h4 className="text-2xl font-semibold">Workload Architect ✨</h4>
+          </div> 
 
           <p className="text-gray-400 text-sm mb-5 leading-relaxed">
             Describe your project workload and instantly get recommended vCPU,
@@ -193,7 +199,7 @@ function LiveAgent() {
           <button
             onClick={generateSpecs}
             disabled={isGenerating}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 rounded-xl transition shadow-lg hover:shadow-blue-700/40 flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg hover:shadow-blue-700/40 flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isGenerating ? (
               <>
@@ -211,19 +217,19 @@ function LiveAgent() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-3 bg-gray-800/40 rounded-lg border-l-4 border-blue-500">
                   <div className="text-xs text-gray-400">vCPU</div>
-                  <div className="font-mono text-white font-bold">{specOutput.vcpu}</div>
+                  <div className="font-mono text-white font-semibold">{specOutput.vcpu}</div>
                 </div>
                 <div className="p-3 bg-gray-800/40 rounded-lg border-l-4 border-blue-500">
                   <div className="text-xs text-gray-400">RAM</div>
-                  <div className="font-mono text-white font-bold">{specOutput.ram}</div>
+                  <div className="font-mono text-white font-semibold">{specOutput.ram}</div>
                 </div>
                 <div className="p-3 bg-gray-800/40 rounded-lg border-l-4 border-orange-500">
                   <div className="text-xs text-gray-400">Power</div>
-                  <div className="font-mono text-white font-bold">{specOutput.power_watts}</div>
+                  <div className="font-mono text-white font-semibold">{specOutput.power_watts}</div>
                 </div>
                 <div className="p-3 bg-gray-800/40 rounded-lg border-l-4 border-cyan-500">
                   <div className="text-xs text-gray-400">Cooling</div>
-                  <div className="font-mono text-white font-bold">{specOutput.cooling_btu}</div>
+                  <div className="font-mono text-white font-semibold">{specOutput.cooling_btu}</div>
                 </div>
               </div>
 
@@ -245,10 +251,13 @@ function LiveAgent() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-purple-700/40 border border-purple-500/40 backdrop-blur-md flex items-center justify-center shadow-lg">
-              <i className="fas fa-brain text-white"></i>
-            </div>
-            <h4 className="text-2xl font-bold">Upscale Intelligence ✨</h4>
+             <div
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg shadow-blue-500/10`}
+                >
+                <FaBrain size={28} />
+                 
+                </div>
+            <h4 className="text-2xl font-semibold">Upscale Intelligence ✨</h4>
           </div>
 
           <p className="text-gray-400 text-sm mb-5 leading-relaxed">
@@ -266,7 +275,7 @@ function LiveAgent() {
           <button
             onClick={runUpscaleAnalysis}
             disabled={isAnalyzing}
-            className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-3 rounded-xl transition shadow-lg hover:shadow-purple-700/40 flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-semibold py-3 rounded-xl transition shadow-lg hover:shadow-purple-700/40 flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isAnalyzing ? (
               <>

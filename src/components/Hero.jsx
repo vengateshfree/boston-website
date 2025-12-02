@@ -35,13 +35,13 @@ function Hero() {
 
       <div className="flex flex-col sm:flex-row justify-center gap-4">
         <a
-          href="#ai-demos"
-          className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-800 text-white font-bold rounded-lg shadow-xl hover:shadow-blue-500/50 transition transform hover:-translate-y-1"
+        x
+          className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-800 text-white font-semibold rounded-lg shadow-xl hover:shadow-blue-500/50 transition transform hover:-translate-y-1"
         >
           <i className="fas fa-sparkles mr-2"></i> Try AI Demo
         </a>
         <a
-          href="#features"
+         
           className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition backdrop-blur-sm"
         >
           Discover Features

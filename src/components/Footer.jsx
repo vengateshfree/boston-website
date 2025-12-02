@@ -7,7 +7,7 @@ function Footer() {
         {/* Top Section */}
         <div className="flex flex-col">
           <div className="flex items-center gap-3 mb-3">
-            <div className="bg-blue-600 text-white font-bold w-7 h-7 flex items-center justify-center rounded">
+            <div className="bg-blue-600 text-white font-semibold w-7 h-7 flex items-center justify-center rounded">
               C
             </div>
             <h1 className="text-2xl font-semibold">
