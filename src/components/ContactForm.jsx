@@ -34,7 +34,7 @@ function ContactSection() {
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 shadow-xl rounded-2xl overflow-hidden bg-white">
 
         {/* Left Image */}
-        <div className="h-80 lg:h-auto">
+        <div className="min-h-80 lg:h-auto">
           <img
             src="https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg"
             alt="contact"
@@ -45,17 +45,8 @@ function ContactSection() {
         
 
         {/* Right Form */}
-        <div className="p-10 lg:p-16 flex flex-col justify-center bg-gray-100">
-                {/* <div className="flex items-center gap-3 mb-8">
-                  <div className="bg-gradient-to-br from-blue-600 to-indigo-600 p-3 rounded-xl">
-                    <BiMessageSquare className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Get in Touch</h3>
-                    <p className="text-gray-500">Have questions? We'd love to hear from you.</p>
-                  </div>
-                </div> */}
-     
+        <div className=" lg:p-16 flex flex-col justify-center bg-gray-100">
+        
 
 
             <div className="bg-white/50 backdrop-blur-2xl rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
@@ -135,9 +126,7 @@ function ContactSection() {
                     <BiSend className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
 
-                  <p className="text-center text-sm text-gray-500 mt-4">
-                    We typically respond within 24 hours
-                  </p>
+           
 
                 </div>
               </div>

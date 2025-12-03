@@ -38,7 +38,7 @@ function Challange() {
 
   return (
     <div>
-   <section id="problem" className="relative py-24 bg-white overflow-hidden">
+   <section id="problem" className="relative py-24 bg-gray-200 overflow-hidden">
 
   {/* 🔵 Soft blurred background accents */}
   <div className="absolute -top-20 -left-20 w-[350px] h-[350px] bg-blue-200 opacity-20 blur-[140px] rounded-full"></div>
