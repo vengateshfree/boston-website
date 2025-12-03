@@ -1,9 +1,37 @@
-import React from "react";
+
+import React, { useState } from "react";
+import { RiMvAiLine } from "react-icons/ri";
+import { BiMailSend, BiMapPin, BiMessageSquare, BiPhone, BiSend } from "react-icons/bi";
+import { CgLock } from "react-icons/cg";
+  
 
 function ContactSection() {
+
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+    message: ""
+  });
+  
+  const [focused, setFocused] = useState({
+    email: false,
+    phone: false,
+    message: false
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    alert("Thank you for your message! We'll get back to you soon.");
+    setFormData({ email: "", phone: "", message: "" });
+  };
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 shadow-xl rounded-2xl overflow-hidden bg-white">
+    <section className="bg-gray-50 py-10">
+      <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 shadow-xl rounded-2xl overflow-hidden bg-white">
 
         {/* Left Image */}
         <div className="h-80 lg:h-auto">
@@ -14,74 +42,107 @@ function ContactSection() {
           />
         </div>
 
+        
+
         {/* Right Form */}
-        <div className="p-10 lg:p-16 flex flex-col justify-center">
-          <h2 className="text-4xl font-semibold text-gray-900 mb-3">
-            Get in Touch
-          </h2>
-          <p className="text-gray-600 mb-10">
-            Have questions? We'd love to hear from you.
-          </p>
+        <div className="p-10 lg:p-16 flex flex-col justify-center bg-gray-100">
+                {/* <div className="flex items-center gap-3 mb-8">
+                  <div className="bg-gradient-to-br from-blue-600 to-indigo-600 p-3 rounded-xl">
+                    <BiMessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">Get in Touch</h3>
+                    <p className="text-gray-500">Have questions? We'd love to hear from you.</p>
+                  </div>
+                </div> */}
+     
 
-          <form className="space-y-7">
 
-            {/* Email */}
-            <div className="relative">
-              <input
-                type="email"
-                required
-                className="peer w-full border border-gray-300 rounded-xl px-4 py-4 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                placeholder=" "
-              />
-              <label className="absolute left-4 top-2 text-gray-500 text-sm transition-all
-                peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
-                peer-placeholder-shown:text-gray-400 peer-focus:top-2
-                peer-focus:text-sm peer-focus:text-blue-600">
-                Email Address
-              </label>
+            <div className="bg-white/50 backdrop-blur-2xl rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
+              
+              {/* Background decoration */}
+             
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="bg-gradient-to-br from-blue-600 to-indigo-600 p-3 rounded-xl">
+                    <BiMessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">Send us a message</h3>
+                    <p className="text-gray-500">Fill out the form below and we'll get back to you</p>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  
+                  {/* Email Field */}
+                  <div className="relative">
+                    <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all ${focused.email || formData.email ? 'text-blue-600' : 'text-gray-400'}`}>
+                      <BiMailSend className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      onFocus={() => setFocused(prev => ({ ...prev, email: true }))}
+                      onBlur={() => setFocused(prev => ({ ...prev, email: false }))}
+                      className="w-full pl-14 pr-4 py-4 border-2 border-gray-200 rounded-2xl text-gray-900 focus:border-blue-600 focus:outline-none transition-all bg-gray-50 focus:bg-white"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+
+                  {/* Phone Field */}
+                  <div className="relative">
+                    <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all ${focused.phone || formData.phone ? 'text-blue-600' : 'text-gray-400'}`}>
+                      <BiPhone className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      onFocus={() => setFocused(prev => ({ ...prev, phone: true }))}
+                      onBlur={() => setFocused(prev => ({ ...prev, phone: false }))}
+                      className="w-full pl-14 pr-4 py-4 border-2 border-gray-200 rounded-2xl text-gray-900 focus:border-blue-600 focus:outline-none transition-all bg-gray-50 focus:bg-white"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+
+                  {/* Message Field */}
+                  <div className="relative">
+                    <div className={`absolute left-4 top-6 transition-all ${focused.message || formData.message ? 'text-blue-600' : 'text-gray-400'}`}>
+                      <BiMessageSquare className="w-5 h-5" />
+                    </div>
+                    <textarea
+                      rows="5"
+                      required
+                      value={formData.message}
+                      onChange={(e) => handleChange('message', e.target.value)}
+                      onFocus={() => setFocused(prev => ({ ...prev, message: true }))}
+                      onBlur={() => setFocused(prev => ({ ...prev, message: false }))}
+                      className="w-full pl-14 pr-4 py-4 border-2 border-gray-200 rounded-2xl text-gray-900 focus:border-blue-600 focus:outline-none transition-all resize-none bg-gray-50 focus:bg-white"
+                      placeholder="Tell us how we can help you..."
+                    ></textarea>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-3 group"
+                  >
+                    Send Message
+                    <BiSend className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+
+                  <p className="text-center text-sm text-gray-500 mt-4">
+                    We typically respond within 24 hours
+                  </p>
+
+                </div>
+              </div>
             </div>
-
-            {/* Phone */}
-            <div className="relative">
-              <input
-                type="text"
-                required
-                className="peer w-full border border-gray-300 rounded-xl px-4 py-4 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                placeholder=" "
-              />
-              <label className="absolute left-4 top-2 text-gray-500 text-sm transition-all
-                peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
-                peer-placeholder-shown:text-gray-400 peer-focus:top-2
-                peer-focus:text-sm peer-focus:text-blue-600">
-                Phone Number
-              </label>
-            </div>
-
-            {/* Description */}
-            <div className="relative">
-              <textarea
-                rows="4"
-                required
-                className="peer w-full border border-gray-300 rounded-xl px-4 py-4 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                placeholder=" "
-              ></textarea>
-              <label className="absolute left-4 top-2 text-gray-500 text-sm transition-all
-                peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
-                peer-placeholder-shown:text-gray-400 peer-focus:top-2
-                peer-focus:text-sm peer-focus:text-blue-600">
-                Your Message
-              </label>
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full py-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all shadow-lg"
-            >
-              Send Message
-            </button>
-
-          </form>
+         
         </div>
 
       </div>
