@@ -2,34 +2,56 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#0C1320] text-gray-300 py-10">
+    // Changed bg-[#0C1320] to bg-blue-900
+    <footer className="w-full bg-blue-900 text-blue-100 py-12 border-t border-blue-800">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Top Section */}
-        <div className="flex flex-col">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="bg-blue-600 text-white font-semibold w-7 h-7 flex items-center justify-center rounded">
-              C
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          
+          {/* Brand */}
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-white text-blue-900 font-bold w-8 h-8 flex items-center justify-center rounded-lg">
+                C
+              </div>
+              <h1 className="text-2xl font-bold text-white">
+                Catalyst<span className="text-blue-300">Suite</span>
+              </h1>
             </div>
-            <h1 className="text-2xl font-semibold">
-              Catalyst<span className="text-blue-500">Suite</span>
-            </h1>
+            <p className="text-sm text-blue-200 uppercase tracking-wider font-semibold mb-4">
+              BOSTON TECH INDIA
+            </p>
+            <p className="text-blue-200/80 leading-relaxed max-w-sm">
+              Empowering Education & Enterprise with next-gen AI infrastructure and audit-ready compliance tools.
+            </p>
           </div>
 
-          <p className="text-sm text-gray-400 uppercase tracking-wider">
-            BOSTON TECH INDIA
-          </p>
+          {/* Links Column 1 */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Platform</h4>
+            <ul className="space-y-2 text-blue-200/80 text-sm">
+              <li><a href="#" className="hover:text-white transition">Unified Dashboard</a></li>
+              <li><a href="#" className="hover:text-white transition">Audit Agents</a></li>
+              <li><a href="#" className="hover:text-white transition">Cost Optimization</a></li>
+            </ul>
+          </div>
 
-          <p className="mt-6 text-lg text-gray-400 leading-relaxed max-w-lg">
-            Empowering creators with next-gen infrastructure.
-          </p>
+          {/* Links Column 2 */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <ul className="space-y-2 text-blue-200/80 text-sm">
+              <li><a href="#" className="hover:text-white transition">About Us</a></li>
+              <li><a href="#" className="hover:text-white transition">Campus Partners</a></li>
+              <li><a href="#" className="hover:text-white transition">Contact</a></li>
+            </ul>
+          </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-700 mt-10"></div>
-
-        {/* Bottom Section */}
-        <div className="text-center py-6 text-sm text-gray-500">
-          © 2025 Boston Tech India. All rights reserved.
+        <div className="border-t border-blue-800/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-blue-300/60">
+          <p>© 2025 Boston Tech India. All rights reserved.</p>
+          <div className="flex gap-6 mt-4 md:mt-0">
+             <a href="#" className="hover:text-white">Privacy Policy</a>
+             <a href="#" className="hover:text-white">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

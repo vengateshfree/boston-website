@@ -1,175 +1,143 @@
-// Your provided code with background changed to white
 import React, { useState } from 'react'
-import { FaFileAlt } from "react-icons/fa";
-import { CgIfDesign } from "react-icons/cg";
-import { FaStar } from "react-icons/fa6";
-import { FaBrain } from "react-icons/fa6";
+import { FaStar, FaBrain } from "react-icons/fa6";
 
 function LiveAgent() {
-  const [apiKey, setApiKey] = useState('');
   const [upscaleInput, setUpscaleInput] = useState('');
   const [specOutput, setSpecOutput] = useState(null);
   const [upscaleOutput, setUpscaleOutput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [workloadInput, setWorkloadInput] = useState('');
 
-  const callGemini = async (prompt) => {
-    if (!apiKey.trim()) {
-      alert("Please enter a valid Gemini API Key in the top navigation bar to use the demo features.");
-      return null;
-    }
-
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`;
-    const payload = {
-      contents: [{ parts: [{ text: prompt }] }]
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) throw new Error(`API Error: ${response.status}`);
-      const data = await response.json();
-      return data.candidates[0].content.parts[0].text;
-    } catch (error) {
-      console.error("Gemini Error:", error);
-      alert("Failed to connect to Gemini AI. Check console for details or verify your API key.");
-      return null;
-    }
-  };
-
+  // Mock Data: Workload Architect
   const generateSpecs = async () => {
     if (!workloadInput) return alert("Please describe your workload first.");
-
     setIsGenerating(true);
-
-    const prompt = `Act as a senior IT Infrastructure Architect. Analyze this user workload request: "${workloadInput}". Estimate the required server specifications including power and cooling. Return raw JSON only.`;
-
-    const result = await callGemini(prompt);
-
-    if (result) {
-      try {
-        const jsonStr = result.replace(/```json/g, '').replace(/```/g, '').trim();
-        const data = JSON.parse(jsonStr);
-        setSpecOutput(data);
-      } catch (e) {
-        console.error(e);
-        alert("Error parsing AI response. Try again.");
-      }
-    }
-
-    setIsGenerating(false);
+    setTimeout(() => {
+      setSpecOutput({
+        vcpu: "32 vCPU",
+        ram: "128 GB DDR5",
+        power_watts: "650W",
+        cooling_btu: "2218 BTU/hr",
+        reasoning: "Optimized for high-concurrency student portals and exam management systems."
+      });
+      setIsGenerating(false);
+    }, 1500); 
   };
 
+  // Mock Data: Upscale Intelligence
   const runUpscaleAnalysis = async () => {
     if (!upscaleInput) return alert("Please paste server stats to analyze.");
-
     setIsAnalyzing(true);
-
-    const prompt = `Act as a Senior Infrastructure Consultant. Analyze: "${upscaleInput}" and return optimized upgrade recommendations in markdown (max 150 words).`;
-
-    const result = await callGemini(prompt);
-    if (result) setUpscaleOutput(result);
-
-    setIsAnalyzing(false);
+    setTimeout(() => {
+      setUpscaleOutput(`### 🎓 Audit & Optimization Report
+**Critical Finding**: 35% of resources idle outside exam hours.
+- **Action**: Implement auto-scaling for "Lab Cluster A".
+- **Compliance**: Data residency confirmed on-prem.
+- **Savings**: Estimated **$12,000/year** in energy costs.`);
+      setIsAnalyzing(false);
+    }, 1500);
   };
 
   const parseMarkdown = (text) => {
     return text
-      .replace(/### (.*?)$/gm, '<h3 class="font-semibold mt-4 text-black">$1</h3>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-black">$1</strong>')
-      .replace(/- (.*?)$/gm, '<li class="text-gray-700">$1</li>')
-      .replace(/(<li.*<\/li>)/s, '<ul class="list-disc pl-6 text-gray-700">$1</ul>');
+      .replace(/### (.*?)$/gm, '<h3 class="font-semibold mt-2 mb-2 text-blue-900">$1</h3>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-blue-700">$1</strong>')
+      .replace(/- (.*?)$/gm, '<li class="text-gray-700 ml-4">$1</li>');
   };
 
   return (
-    <div>
-      <section id="ai-demos" className="relative py-24 bg-white text-black overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-blue-600 font-semibold tracking-wider uppercase text-sm">Live Agentic AI</h2>
-            <h3 className="text-4xl font-extrabold mt-2 text-gray-900">Experience the Future of IT Automation</h3>
-            <p className="mt-3 text-gray-500">Enter your Gemini API key in the top navigation to unlock these live demos.</p>
-          </div>
-
-
-          
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Workload Architect */}
-            <div className="relative bg-white border border-gray-200 p-7 rounded-2xl shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gray-100 border border-gray-200">
-                  <FaStar size={30} />
-                </div>
-                <h4 className="text-2xl font-semibold text-gray-900">Workload Architect ✨</h4>
-              </div>
-
-              <p className="text-gray-600 text-sm mb-5 leading-relaxed">Describe your project workload and instantly get recommended specs.</p>
-
-              <textarea value={workloadInput} onChange={(e) => setWorkloadInput(e.target.value)} className="w-full bg-gray-50 border border-gray-300 rounded-xl p-4 text-black text-sm focus:border-blue-500" placeholder="Describe your workload here..." />
-
-              <button onClick={generateSpecs} disabled={isGenerating} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition">
-                {isGenerating ? 'Processing...' : 'Generate Specs'}
-              </button>
-
-              {specOutput && (
-                <div className="mt-6 bg-gray-50 rounded-xl p-5 border border-gray-200">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 bg-white rounded-lg border-l-4 border-blue-500">
-                      <div className="text-xs text-gray-500">vCPU</div>
-                      <div className="font-mono text-gray-900 font-semibold">{specOutput.vcpu}</div>
-                    </div>
-                    <div className="p-3 bg-white rounded-lg border-l-4 border-blue-500">
-                      <div className="text-xs text-gray-500">RAM</div>
-                      <div className="font-mono text-gray-900 font-semibold">{specOutput.ram}</div>
-                    </div>
-                    <div className="p-3 bg-white rounded-lg border-l-4 border-orange-500">
-                      <div className="text-xs text-gray-500">Power</div>
-                      <div className="font-mono text-gray-900 font-semibold">{specOutput.power_watts}</div>
-                    </div>
-                    <div className="p-3 bg-white rounded-lg border-l-4 border-cyan-500">
-                      <div className="text-xs text-gray-500">Cooling</div>
-                      <div className="font-mono text-gray-900 font-semibold">{specOutput.cooling_btu}</div>
-                    </div>
-                  </div>
-                  <div className="mt-4 text-xs text-gray-600 italic">{specOutput.reasoning}</div>
-                </div>
-              )}
-            </div>
-
-            {/* Upscale Intelligence */}
-            <div className="relative bg-white border border-gray-200 p-7 rounded-2xl shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gray-100 border border-gray-200">
-                  <FaBrain size={28} />
-                </div>
-                <h4 className="text-2xl font-semibold text-gray-900">Upscale Intelligence ✨</h4>
-              </div>
-
-              <p className="text-gray-600 text-sm mb-5 leading-relaxed">Paste your server stats and get upgrade recommendations.</p>
-
-              <textarea value={upscaleInput} onChange={(e) => setUpscaleInput(e.target.value)} className="w-full bg-gray-50 border border-gray-300 rounded-xl p-4 text-black text-xs font-mono" placeholder="Current: 2x Xeon 8-core, 64GB RAM, 95% CPU load..." />
-
-              <button onClick={runUpscaleAnalysis} disabled={isAnalyzing} className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl transition">
-                {isAnalyzing ? 'Analyzing...' : 'Get Recommendations'}
-              </button>
-
-              {upscaleOutput && (
-                <div className="mt-6 bg-gray-50 rounded-xl p-5 border border-gray-200 max-h-64 overflow-y-auto">
-                  <div className="prose prose-gray text-sm" dangerouslySetInnerHTML={{ __html: parseMarkdown(upscaleOutput) }} />
-                </div>
-              )}
-            </div>
-          </div>
+    <section id="ai-demos" className="py-24 bg-blue-50/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-blue-600 font-bold tracking-wider uppercase text-sm">Interactive Demo</h2>
+          <h3 className="text-3xl md:text-4xl font-extrabold mt-3 text-gray-900">Live Infrastructure Intelligence</h3>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Experience how our agents handle complex University IT scenarios in real-time.
+          </p>
         </div>
-      </section>
-    </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Workload Architect */}
+          <div className="bg-white p-8 rounded-2xl shadow-xl shadow-blue-900/5 border border-blue-100 flex flex-col h-full">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-600/20">
+                <FaStar size={20} />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900">Provisioning Agent</h4>
+            </div>
+            
+            <p className="text-gray-600 text-sm mb-4">Simulate requirements for new deployments (e.g., LMS, Student Portal).</p>
+            
+            <textarea 
+              value={workloadInput} 
+              onChange={(e) => setWorkloadInput(e.target.value)} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition resize-none h-32" 
+              placeholder="Ex: Hosting Moodle for 5,000 concurrent students during finals week..." 
+            />
+
+            <button 
+              onClick={generateSpecs} 
+              disabled={isGenerating} 
+              className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-md"
+            >
+              {isGenerating ? 'Analyzing Requirements...' : 'Generate Spec Recommendation'}
+            </button>
+
+            {specOutput && (
+              <div className="mt-6 bg-slate-50 rounded-xl p-5 border border-slate-200 animate-fade-in-up">
+                <div className="grid grid-cols-2 gap-3">
+                  {Object.entries(specOutput).filter(([k]) => k !== 'reasoning').map(([key, val]) => (
+                    <div key={key} className="bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
+                      <div className="text-[10px] text-gray-500 uppercase font-bold tracking-wider">{key.replace('_', ' ')}</div>
+                      <div className="font-mono text-gray-900 font-semibold">{val}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 text-xs text-blue-700 bg-blue-50 p-3 rounded-lg border border-blue-100">
+                  <strong>Analysis:</strong> {specOutput.reasoning}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Upscale Intelligence */}
+          <div className="bg-white p-8 rounded-2xl shadow-xl shadow-blue-900/5 border border-blue-100 flex flex-col h-full">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="p-3 bg-indigo-600 rounded-xl text-white shadow-lg shadow-indigo-600/20">
+                <FaBrain size={20} />
+              </div>
+              <h4 className="text-xl font-bold text-gray-900">Audit & Upscale Agent</h4>
+            </div>
+
+            <p className="text-gray-600 text-sm mb-4">Paste utilization logs to check for cost savings and audit compliance.</p>
+
+            <textarea 
+              value={upscaleInput} 
+              onChange={(e) => setUpscaleInput(e.target.value)} 
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm font-mono focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none h-32" 
+              placeholder="Ex: Lab Cluster B: 15% CPU avg, 90% Peak RAM, Energy usage high..." 
+            />
+
+            <button 
+              onClick={runUpscaleAnalysis} 
+              disabled={isAnalyzing} 
+              className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-md"
+            >
+              {isAnalyzing ? 'Running Audit...' : 'Run Optimization Audit'}
+            </button>
+
+            {upscaleOutput && (
+              <div className="mt-6 bg-white rounded-xl p-5 border border-gray-200 shadow-inner h-full animate-fade-in-up">
+                <div className="prose prose-sm prose-blue" dangerouslySetInnerHTML={{ __html: parseMarkdown(upscaleOutput) }} />
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }
 
