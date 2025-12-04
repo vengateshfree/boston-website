@@ -97,6 +97,9 @@ function LiveAgent() {
             <p className="mt-3 text-gray-500">Enter your Gemini API key in the top navigation to unlock these live demos.</p>
           </div>
 
+
+          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Workload Architect */}
             <div className="relative bg-white border border-gray-200 p-7 rounded-2xl shadow-xl transition-all duration-300">
