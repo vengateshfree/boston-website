@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import { useLocation } from 'react-router-dom';
 import ContactForm from './components/ContactForm';
 
+import logocryst  from './assets/logocryst.png';
+
 function TotalApp() {
   // Removed apiKey state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -37,14 +39,13 @@ function TotalApp() {
 
               {/* Logo */}
               <div className="flex-shrink-0 flex items-center gap-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-semibold text-xl">
-                  C
-                </div>
+                <img src={logocryst} alt="Catalyst Suite Logo" className="h-12 w-12" />
+              
                 <div className="flex flex-col">
-                  <span className="font-semibold text-lg sm:text-xl tracking-tight text-gray-900 leading-none">
-                    Catalyst<span className="text-blue-600">Suite</span>
+                  <span className="font-semibold text-lg sm:text-2xl tracking-tight text-gray-900 leading-none">
+                    Catalyst<span className="text-blue-700">Suite</span>
                   </span>
-                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-500 font-semibold">
+                  <span className="text-[12px] pt-0.5  text-center sm:text-[10px] text-[#1F0C77] uppercase tracking-wider  font-semibold">
                     by Boston Tech India
                   </span>
                 </div>
