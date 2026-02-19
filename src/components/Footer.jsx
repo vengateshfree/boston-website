@@ -1,5 +1,9 @@
 import React from "react";
 
+
+import logocryst  from '../assets/logocryst.png';
+// import logocryst  from './assets/logocryst.png';
+
 function Footer() {
   return (
     // Changed bg-[#0C1320] to bg-blue-900
@@ -10,9 +14,11 @@ function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-white text-blue-900 font-bold w-8 h-8 flex items-center justify-center rounded-lg">
+              {/* <div className="bg-white text-blue-900 font-bold w-8 h-8 flex items-center justify-center rounded-lg">
                 C
-              </div>
+              </div> */}
+
+                              <img src={logocryst} alt="Catalyst Suite Logo" className="h-12 w-12" />
               <h1 className="text-2xl font-bold text-white">
                 Catalyst<span className="text-blue-300">Suite</span>
               </h1>
