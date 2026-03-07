@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { RiMvAiLine } from "react-icons/ri";
 import { BiMailSend, BiMapPin, BiMessageSquare, BiPhone, BiSend } from "react-icons/bi";
-import { CgLock } from "react-icons/cg";
+import { CgLock, CgNametag } from "react-icons/cg";
   
 
 function ContactSection() {
@@ -65,6 +65,22 @@ function ContactSection() {
                 </div>
 
                 <div className="space-y-6">
+                       {/* Email Field */}
+                  <div className="relative">
+                    <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all ${focused.email || formData.email ? 'text-blue-600' : 'text-gray-400'}`}>
+                      <CgNametag className="w-5 h-5" />
+                    </div>
+                    <input
+                      type="text"
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleChange('fullname', e.target.value)}
+                      onFocus={() => setFocused(prev => ({ ...prev, email: true }))}
+                      onBlur={() => setFocused(prev => ({ ...prev, email: false }))}
+                      className="w-full pl-14 pr-4 py-4 border-2 border-gray-200 rounded-2xl text-gray-900 focus:border-blue-600 focus:outline-none transition-all bg-gray-50 focus:bg-white"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
                   
                   {/* Email Field */}
                   <div className="relative">
