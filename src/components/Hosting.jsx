@@ -63,13 +63,17 @@ function Hosting() {
                 ))}
               </ul>
 
-              <button className={`w-full py-3 rounded-xl font-bold transition ${
+
+              <a href="https://demo.tekki.cloud/" target="_blank" >
+
+              <button className={`w-full py-3 rounded-xl font-bold cursor-pointer transition ${
                 plan.highlight 
                   ? "bg-white text-blue-900 hover:bg-blue-50" 
                   : "bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
               }`}>
                 {plan.button}
               </button>
+              </a>
             </div>
           ))}
         </div>
