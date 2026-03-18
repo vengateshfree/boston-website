@@ -35,7 +35,7 @@ function ContactSection() {
         },
         body: JSON.stringify({
           ...formData,
-          datafrom: "CatalystSuite Enterprise ",
+          datafrom: "CatalystSuite Academy ",
         }),
       });
 
